@@ -198,40 +198,31 @@ def confirm(answers):
         return False
 class getoutofloop(Exception): pass
 
-
+ch = ['A','B','C','D']
+def loop(A,cur=0):
+    
+    if cur == len(A):
+        if confirm(A):
+            answer = "正确答案:"
+            for i in range(10):
+                answer +=ch[A[i]]
+                if i<9:
+                    answer+=","
+            print(answer)  
+        return
+        
+    for col in range(10):
+        A[cur],flag = col,True
+           
+        if  A[col]>3:              
+            flag = False
+            break
+        if flag:
+            loop(A,cur+1)
 
 if __name__=="__main__":
     answers = [0]*10
-    try:
-        for a in range(4):
-            answers[0]=a
-            for b in range(4):
-                answers[1]=b
-                for c in range(4):
-                    answers[2]=c
-                    for d in range(4):
-                        answers[3]=d
-                        for e in range(4):
-                            answers[4]=e
-                            for f in range(4):
-                                answers[5]=f
-                                for g in range(4):
-                                    answers[6]=g
-                                    for h in range(4):
-                                        answers[7]=h
-                                        for i in range(4):
-                                            answers[8]=i
-                                            for j in range(4):
-                                                answers[9]=j
-                                                if confirm(answers):
-                                                  raise getoutofloop()
-
-    except:
-        pass
-    ch = ['A','B','C','D']
-    print("最终结果如下:")
-    for i in range(10):
-        print(i+1,":",ch[answers[i]])
+    loop(answers)
 
 
 
